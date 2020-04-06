@@ -3,19 +3,24 @@ import mongoose from 'mongoose';
 
 const mongodbImage = 'mongo';
 const mongodbPort = '27017';
-const containerName = 'watchtower-test-mongodb';
+const containerName = 'testdb-mongodb';
 
 
 export class TestDB {
+    private _endpoint = this.getEndpoint('localhost');
+
+    endpoint(): string {
+        return this._endpoint;
+    }
+
     async start(version = '4.0.17'): Promise<void> {
-        let host = 'localhost';
         if (this.notCI()) {
             await dockerCommand(`pull ${mongodbImage}:${version}`, { echo: false });
             await dockerCommand(`run --name ${containerName} -d -p ${mongodbPort}:${mongodbPort} ${mongodbImage}`, { echo: false });
         } else {
-            host = 'mongodb';
+            this._endpoint = this.getEndpoint('mongodb');
         }
-        await mongoose.connect(`mongodb://${host}:${mongodbPort}/watchtower`, {
+        await mongoose.connect(this._endpoint, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -34,5 +39,9 @@ export class TestDB {
 
     private notCI(): boolean {
         return !process.env['GITHUB_ACTIONS'] && !process.env['CI'];
+    }
+
+    private getEndpoint(host: string): string {
+        return `mongodb://${host}:${mongodbPort}/testdb`;
     }
 }

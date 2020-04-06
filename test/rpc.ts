@@ -16,7 +16,7 @@ describe('TestRPC', () => {
         await testRPC.stop();
     });
 
-    it('an api client should be able to connect to the node', async () => {
+    it('should initialize an API client connected to the node', async () => {
         const rpcApi = testRPC.api();
 
         const [chain, nodeName] = await Promise.all([
@@ -26,5 +26,11 @@ describe('TestRPC', () => {
 
         chain.should.eq('Development');
         nodeName.should.eq('parity-polkadot');
+    });
+
+    it('should expose the api endpoint', async () => {
+        const endpoint = testRPC.endpoint();
+
+        endpoint.substr(0, 5).should.eq('ws://');
     });
 });
