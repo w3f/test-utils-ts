@@ -7,9 +7,16 @@ const containerName = 'watchtower-test-rpc';
 const rpcPort = '11000';
 
 export class TestRPC {
-    private _endpoint = `ws://localhost:${rpcPort}`;
-
+    private _endpoint: string;
     private _api: ApiPromise;
+
+    constructor() {
+        if (this.notCI()) {
+            this._endpoint = `ws://localhost:${rpcPort}`;
+        } else {
+            this._endpoint = `ws://polkadot:${rpcPort}`
+        }
+    }
 
     api(): ApiPromise {
         return this._api;
@@ -23,9 +30,8 @@ export class TestRPC {
         if (this.notCI()) {
             await dockerCommand(`pull ${rpcImage}:v${version}`, { echo: false });
             await dockerCommand(`run --name ${containerName} -d -p ${rpcPort}:${rpcPort} ${rpcImage} --dev --ws-port ${rpcPort} --unsafe-ws-external`, { echo: false });
-        } else {
-            this._endpoint = `ws://polkadot:${rpcPort}`;
         }
+
         const provider = new WsProvider(this._endpoint);
         let connected = false
         while (!connected) {
