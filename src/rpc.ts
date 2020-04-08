@@ -3,7 +3,7 @@ import { ApiPromise, WsProvider } from '@polkadot/api';
 import { waitReady } from '@polkadot/wasm-crypto';
 
 const rpcImage = 'parity/polkadot';
-const containerName = 'watchtower-test-rpc';
+const containerName = 'w3f-test-utils-rpc';
 const rpcPort = '11000';
 
 export class TestRPC {
