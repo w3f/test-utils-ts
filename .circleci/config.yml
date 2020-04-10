@@ -9,6 +9,11 @@ jobs:
       - image: parity/polkadot:v0.7.28
         name: polkadot
         command: --dev --ws-port 11000 --unsafe-ws-external
+      - image: mariadb:10.5.2-bionic
+        name: mariadb
+        environment:
+          MYSQL_ROOT_PASSWORD: pass
+          MYSQL_DATABASE: test
     steps:
       - checkout
       - setup_remote_docker
