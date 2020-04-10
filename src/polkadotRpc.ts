@@ -2,19 +2,22 @@ import { dockerCommand } from 'docker-cli-js';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import { waitReady } from '@polkadot/wasm-crypto';
 
-const rpcImage = 'parity/polkadot';
-const containerName = 'w3f-test-utils-rpc';
-const rpcPort = '11000';
+import { notCI } from './util';
 
-export class TestRPC {
+const image = 'parity/polkadot';
+const containerName = 'w3f-test-utils-polkadot-rpc';
+const port = '11000';
+
+
+export class TestPolkadotRPC {
     private _endpoint: string;
     private _api: ApiPromise;
 
     constructor() {
-        if (this.notCI()) {
-            this._endpoint = `ws://localhost:${rpcPort}`;
+        if (notCI()) {
+            this._endpoint = `ws://localhost:${port}`;
         } else {
-            this._endpoint = `ws://polkadot:${rpcPort}`
+            this._endpoint = `ws://polkadot:${port}`
         }
     }
 
@@ -27,9 +30,9 @@ export class TestRPC {
     }
 
     async start(version = '0.7.28'): Promise<void> {
-        if (this.notCI()) {
-            await dockerCommand(`pull ${rpcImage}:v${version}`, { echo: false });
-            await dockerCommand(`run --name ${containerName} -d -p ${rpcPort}:${rpcPort} ${rpcImage} --dev --ws-port ${rpcPort} --unsafe-ws-external`, { echo: false });
+        if (notCI()) {
+            await dockerCommand(`pull ${image}:v${version}`, { echo: false });
+            await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image} --dev --ws-port ${port} --unsafe-ws-external`, { echo: false });
         }
 
         const provider = new WsProvider(this._endpoint);
@@ -50,16 +53,8 @@ export class TestRPC {
         if (this._api) {
             this._api.disconnect();
         }
-        if (this.notCI()) {
+        if (notCI()) {
             await dockerCommand(`rm -f ${containerName}`, { echo: false });
         }
-    }
-
-    private notCI(): boolean {
-        return !process.env['GITHUB_ACTIONS'] && !process.env['CI'];
-    }
-
-    private async delay(ms: number): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }

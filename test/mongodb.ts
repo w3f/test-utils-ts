@@ -1,19 +1,19 @@
 import mongoose from 'mongoose';
-import { TestDB } from '../src/db';
+import { TestMongoDB } from '../src/mongodb';
 
 import { should } from 'chai';
 
 should();
 
-const testDB = new TestDB();
+const testMongodb = new TestMongoDB();
 
-describe('TestDB', () => {
+describe('TestMongodb', () => {
     before(async () => {
-        await testDB.start();
+        await testMongodb.start();
     });
 
     after(async () => {
-        await testDB.stop();
+        await testMongodb.stop();
     });
 
     it('a client should be able to connect to the DB', async () => {
@@ -21,7 +21,7 @@ describe('TestDB', () => {
     });
 
     it('should expose the api endpoint', async () => {
-        const endpoint = testDB.endpoint();
+        const endpoint = testMongodb.endpoint();
 
         endpoint.substr(0, 10).should.eq('mongodb://');
     });
