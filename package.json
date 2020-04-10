@@ -1,6 +1,6 @@
 {
   "name": "@w3f/test-utils",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Test utilities",
   "repository": "git@github.com:w3f/test-utils-ts.git",
   "author": "W3F Infrastructure Team <devops@web3.foundation>",
@@ -15,7 +15,7 @@
     "build": "tsc --build tsconfig.json",
     "prepare": "yarn build",
     "pretest": "yarn lint",
-    "test": "mocha --timeout 10000 --require ts-node/register --exit test/**/*.ts",
+    "test": "mocha --timeout 200000 --require ts-node/register --exit test/**/*.ts",
     "start": "node ./dist/src/index.js start"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "@types/mongoose": "^5.7.8",
     "@w3f/logger": "^0.2.0",
     "docker-cli-js": "^2.7.1",
+    "mariadb": "^2.3.1",
     "mongoose": "^5.9.7"
   },
   "devDependencies": {
