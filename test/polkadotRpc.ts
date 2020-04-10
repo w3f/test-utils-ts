@@ -1,23 +1,24 @@
-import { TestRPC } from '../src/rpc';
+import { TestPolkadotRPC } from '../src/polkadotRpc';
 
 import { should } from 'chai';
 
 should();
 
-const testRPC = new TestRPC();
+
+const testPolkadotRPC = new TestPolkadotRPC();
 const polkadotVersion = '0.7.28';
 
-describe('TestRPC', () => {
+describe('TestPolkadotRPC', () => {
     before(async () => {
-        await testRPC.start(polkadotVersion);
+        await testPolkadotRPC.start(polkadotVersion);
     });
 
     after(async () => {
-        await testRPC.stop();
+        await testPolkadotRPC.stop();
     });
 
     it('should initialize an API client connected to the node', async () => {
-        const rpcApi = testRPC.api();
+        const rpcApi = testPolkadotRPC.api();
 
         const [chain, nodeName] = await Promise.all([
             rpcApi.rpc.system.chain(),
@@ -29,7 +30,7 @@ describe('TestRPC', () => {
     });
 
     it('should expose the api endpoint', async () => {
-        const endpoint = testRPC.endpoint();
+        const endpoint = testPolkadotRPC.endpoint();
 
         endpoint.substr(0, 5).should.eq('ws://');
     });
