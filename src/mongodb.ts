@@ -1,12 +1,14 @@
 import { dockerCommand } from 'docker-cli-js';
 import mongoose from 'mongoose';
 
-const mongodbImage = 'mongo';
-const mongodbPort = '27017';
-const containerName = 'testdb-mongodb';
+import { notCI } from './util';
+
+const image = 'mongo';
+const port = '27017';
+const containerName = 'w3f-test-utils-mongodb';
 
 
-export class TestDB {
+export class TestMongoDB {
     private _endpoint = this.getEndpoint('localhost');
 
     endpoint(): string {
@@ -14,9 +16,9 @@ export class TestDB {
     }
 
     async start(version = '4.0.17'): Promise<void> {
-        if (this.notCI()) {
-            await dockerCommand(`pull ${mongodbImage}:${version}`, { echo: false });
-            await dockerCommand(`run --name ${containerName} -d -p ${mongodbPort}:${mongodbPort} ${mongodbImage}`, { echo: false });
+        if (notCI()) {
+            await dockerCommand(`pull ${image}:${version}`, { echo: false });
+            await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image}`, { echo: false });
         } else {
             this._endpoint = this.getEndpoint('mongodb');
         }
@@ -28,20 +30,12 @@ export class TestDB {
 
     async stop(): Promise<void> {
         await mongoose.connection.close();
-        if (this.notCI()) {
+        if (notCI()) {
             await dockerCommand(`rm -f ${containerName}`, { echo: false });
         }
     }
 
-    private async delay(ms: number): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    private notCI(): boolean {
-        return !process.env['GITHUB_ACTIONS'] && !process.env['CI'];
-    }
-
     private getEndpoint(host: string): string {
-        return `mongodb://${host}:${mongodbPort}/testdb`;
+        return `mongodb://${host}:${port}/testdb`;
     }
 }
