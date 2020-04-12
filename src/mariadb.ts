@@ -3,9 +3,9 @@ import mariadb from 'mariadb';
 
 import { delay, notCI } from './util';
 
-const image = 'mariadb';
+const image = 'bitnami/mariadb';
 const port = '3306';
-const containerName = 'w3f-test-utils-mysql';
+const containerName = 'w3f-test-utils-mariadb';
 const user = 'root';
 const password = 'pass';
 const database = 'test';
@@ -19,10 +19,10 @@ export class TestMariaDB {
         return `mariadb://root:${password}@${this._host}:${port}/${database}`;
     }
 
-    async start(version = '10.5.2-bionic'): Promise<void> {
+    async start(version = '10.3.22-debian-10-r60'): Promise<void> {
         if (notCI()) {
             await dockerCommand(`pull ${image}:${version}`, { echo: false });
-            await dockerCommand(`run --name ${containerName} -e MYSQL_DATABASE=${database} -e MYSQL_ROOT_HOST=% -e MYSQL_ROOT_PASSWORD=${password} -d -p ${port}:${port} ${image}`, { echo: false });
+            await dockerCommand(`run --name ${containerName} -e MARIADB_DATABASE=${database} -e MARIADB_ROOT_HOST=% -e MARIADB_ROOT_PASSWORD=${password} -d -p ${port}:${port} ${image}`, { echo: false });
         } else {
             this._host = 'mariadb';
         }
@@ -35,7 +35,7 @@ export class TestMariaDB {
                 await this._conn.query('SELECT 1');
                 connected = true;
             } catch (e) {
-                console.log(`not yet connected: ${e}`)
+                console.log(`mariaDB not yet connected: ${e}`)
             }
         }
     }
