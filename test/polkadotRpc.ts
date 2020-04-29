@@ -26,7 +26,7 @@ describe('TestPolkadotRPC', () => {
         ]);
 
         chain.should.eq('Development');
-        nodeName.should.eq('parity-polkadot');
+        nodeName.should.eq('Parity Polkadot');
     });
 
     it('should expose the api endpoint', async () => {
