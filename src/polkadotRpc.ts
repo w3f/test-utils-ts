@@ -32,7 +32,7 @@ export class TestPolkadotRPC {
     async start(version = '0.8.6'): Promise<void> {
         if (notCI()) {
             await dockerCommand(`pull ${image}:v${version}`, { echo: false });
-            await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image} --dev --ws-port ${port} --unsafe-ws-external`, { echo: false });
+            await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image} --chain=kusama-dev --alice --ws-port ${port} --unsafe-ws-external`, { echo: false });
         }
 
         const provider = new WsProvider(this._endpoint);
