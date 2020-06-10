@@ -6,7 +6,7 @@ jobs:
       - image: node:12.16.1-alpine3.11
       - image: mongo:4.0.17
         name: mongodb
-      - image: parity/polkadot:v0.7.33
+      - image: parity/polkadot:v0.8.6
         name: polkadot
         command: --dev --ws-port 11000 --unsafe-ws-external
       - image: mariadb:10.5.2-bionic
