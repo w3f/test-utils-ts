@@ -1,6 +1,5 @@
 import { dockerCommand } from 'docker-cli-js';
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import { waitReady } from '@polkadot/wasm-crypto';
 
 import { notCI } from './util';
 
@@ -32,7 +31,7 @@ export class TestPolkadotRPC {
     async start(version = '0.8.6'): Promise<void> {
         if (notCI()) {
             await dockerCommand(`pull ${image}:v${version}`, { echo: false });
-            await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image} --chain=kusama-dev --alice --ws-port ${port} --unsafe-ws-external`, { echo: false });
+            await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image} --chain=kusama-dev --alice --ws-port 11000 --ws-external --rpc-methods=Unsafe --rpc-cors=all`, { echo: false });
         }
 
         const provider = new WsProvider(this._endpoint);
@@ -40,7 +39,6 @@ export class TestPolkadotRPC {
         while (!connected) {
             try {
                 this._api = await ApiPromise.create({ provider });
-                await waitReady();
 
                 connected = true;
             } catch (e) {
