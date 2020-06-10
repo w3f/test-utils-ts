@@ -29,7 +29,7 @@ export class TestPolkadotRPC {
         return this._endpoint;
     }
 
-    async start(version = '0.7.33'): Promise<void> {
+    async start(version = '0.8.6'): Promise<void> {
         if (notCI()) {
             await dockerCommand(`pull ${image}:v${version}`, { echo: false });
             await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image} --dev --ws-port ${port} --unsafe-ws-external`, { echo: false });
