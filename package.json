@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@polkadot/api": "1.18.1",
-    "@polkadot/wasm-crypto": "^1.2.1",
     "@w3f/logger": "^0.4.0",
     "docker-cli-js": "^2.7.1",
     "mariadb": "^2.3.1",
