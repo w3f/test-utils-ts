@@ -1,6 +1,6 @@
 {
   "name": "@w3f/test-utils",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "description": "Test utilities",
   "repository": "git@github.com:w3f/test-utils-ts.git",
   "author": "W3F Infrastructure Team <devops@web3.foundation>",
@@ -19,8 +19,8 @@
     "start": "node ./dist/src/index.js start"
   },
   "dependencies": {
-    "@polkadot/api": "2.1.1",
-    "@w3f/logger": "^0.4.0",
+    "@polkadot/api": "^2.3.1",
+    "@w3f/logger": "^0.4.2",
     "docker-cli-js": "^2.7.1",
     "mariadb": "^2.3.1",
     "mongoose": "^5.9.7"
