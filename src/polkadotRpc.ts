@@ -28,7 +28,7 @@ export class TestPolkadotRPC {
         return this._endpoint;
     }
 
-    async start(version = '0.8.25'): Promise<void> {
+    async start(version = 'v0.8.26'): Promise<void> {  
         if (notCI()) {
             await dockerCommand(`pull ${image}:v${version}`, { echo: false });
             await dockerCommand(`run --name ${containerName} -d -p ${port}:${port} ${image} --chain=kusama-dev --alice --ws-port 11000 --ws-external --rpc-methods=Unsafe --rpc-cors=all`, { echo: false });
