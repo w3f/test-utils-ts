@@ -3,10 +3,10 @@ version: 2
 jobs:
   test:
     docker:
-      - image: web3f/node-dind:v0.3.0
+      - image: web3f/node-dind:v0.4.2
       - image: mongo:4.0.17
         name: mongodb
-      - image: parity/polkadot:v0.8.27 
+      - image: parity/polkadot:v0.8.29 
         name: polkadot
         command: --chain=kusama-dev --ws-port 11000 --ws-external --rpc-methods=Unsafe --rpc-cors=all
       - image: mariadb:10.5.2-bionic
@@ -25,7 +25,7 @@ jobs:
 
   publishPackage:
     docker:
-      - image: node:12.16.1-alpine3.11
+      - image: node:12.18.2-alpine3.11
     steps:
       - checkout
 
@@ -47,7 +47,7 @@ workflows:
       - publishPackage:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
             branches:
               ignore: /.*/
           requires:
