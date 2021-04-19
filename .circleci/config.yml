@@ -25,7 +25,7 @@ jobs:
 
   publishPackage:
     docker:
-      - image: 14.16.1-alpine3.11
+      - image: node:14.16.1-alpine3.11
     steps:
       - checkout
 
