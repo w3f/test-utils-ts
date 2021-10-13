@@ -1,6 +1,6 @@
 {
   "name": "@w3f/test-utils",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "Test utilities",
   "repository": "git@github.com:w3f/test-utils-ts.git",
   "author": "W3F Infrastructure Team <devops@web3.foundation>",
@@ -19,7 +19,7 @@
     "start": "node ./dist/src/index.js start"
   },
   "dependencies": {
-    "@polkadot/api": "^6.1.1",
+    "@polkadot/api": "^6.3.1",
     "@w3f/logger": "^0.4.2",
     "docker-cli-js": "^2.7.1",
     "mariadb": "^2.3.1",
@@ -31,8 +31,8 @@
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "chai": "^4.2.0",
-    "eslint": "^6.6.0",
-    "mocha": "^8.4.0",
+    "eslint": "7.32.0",
+    "mocha": "^9.1.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   }
