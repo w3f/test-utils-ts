@@ -876,9 +876,9 @@ diff@^4.0.1:
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
 
 docker-cli-js@^2.7.1:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/docker-cli-js/-/docker-cli-js-2.8.0.tgz#f3ca146957e32279915c2a8978a81984a136623d"
-  integrity sha512-Bpk8SivY4PIfmoLKtXWUXg7eeIRcEPK0QbyU8cYqZf8t6TU7k/BNd5rdWLlGvjxf3PFjVynL4OllReJbDDun7g==
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/docker-cli-js/-/docker-cli-js-2.9.0.tgz#1584461134cbb6beb548fed2c33de8f5593280bf"
+  integrity sha512-wl6M3uQmrR1Tak/U0mix4om6scuuGeOIcH3WIhJXGGu/KcnS5F3M5/yb8I7N3yn0l1tmf6mTmy/BbDMnDaEXtA==
   dependencies:
     cli-table-2-json "1.0.13"
     dockermachine-cli-js "3.0.5"
