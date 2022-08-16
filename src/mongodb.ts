@@ -22,10 +22,7 @@ export class TestMongoDB {
         } else {
             this._endpoint = this.getEndpoint('mongodb');
         }
-        await mongoose.connect(this._endpoint, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        await mongoose.connect(this._endpoint);
     }
 
     async stop(): Promise<void> {
