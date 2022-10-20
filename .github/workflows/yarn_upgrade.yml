@@ -4,6 +4,5 @@ on:
 jobs:
   yarn-upgrade:
     uses: w3f/base-services-charts/.github/workflows/yarn_upgrade.yml@master
-    with:
-      secrets:
-        PR_PAT: ${{ secrets.REPO_SCOPED_TOKEN }}
+    secrets:
+      PR_PAT: ${{ secrets.REPO_SCOPED_TOKEN }}
