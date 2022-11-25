@@ -3,13 +3,13 @@ version: 2
 jobs:
   test:
     docker:
-      - image: web3f/node-dind:v1.0.0
-      - image: mongo:4.0.17
+      - image: web3f/node-dind:v1
+      - image: mongo:4.0
         name: mongodb
-      - image: parity/polkadot:v0.9.27
+      - image: parity/polkadot:latest
         name: polkadot
         command: --chain=kusama-dev --ws-port 11000 --ws-external --rpc-methods=Unsafe --rpc-cors=all
-      - image: mariadb:10.5.2-bionic
+      - image: mariadb:10.5
         name: mariadb
         environment:
           MYSQL_ROOT_PASSWORD: pass
