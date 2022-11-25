@@ -19,7 +19,7 @@
     "start": "node ./dist/src/index.js start"
   },
   "dependencies": {
-    "@polkadot/api": "^9.4.2",
+    "@polkadot/api": "^9.9.1",
     "@w3f/logger": "^0.4.2",
     "docker-cli-js": "^2.7.1",
     "mariadb": "^2.3.1",
