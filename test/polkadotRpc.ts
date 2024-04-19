@@ -6,7 +6,7 @@ should();
 
 
 const testPolkadotRPC = new TestPolkadotRPC();
-const polkadotVersion = 'v0.9.8'; 
+const polkadotVersion = 'v1.1.0'; 
 
 describe('TestPolkadotRPC', () => {
     before(async () => {

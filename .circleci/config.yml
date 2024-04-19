@@ -6,9 +6,9 @@ jobs:
       - image: web3f/node-dind:v1
       - image: mongo:4.0
         name: mongodb
-      - image: parity/polkadot:latest
+      - image: parity/polkadot:v1.1.0
         name: polkadot
-        command: --chain=kusama-dev --ws-port 11000 --ws-external --rpc-methods=Unsafe --rpc-cors=all
+        command: --chain=kusama-dev --rpc-port 11000 --rpc-external --rpc-methods=Unsafe --rpc-cors=all
       - image: mariadb:10.5
         name: mariadb
         environment:
