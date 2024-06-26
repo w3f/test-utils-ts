@@ -28,7 +28,7 @@ export class TestPolkadotRPC {
         return this._endpoint;
     }
 
-    async start(version = 'v1.10.0'): Promise<void> {  
+    async start(version = 'latest'): Promise<void> {  
         if (notCI()) {
             await dockerCommand(`pull --platform linux/amd64 ${image}:${version}`, { echo: false });
             await dockerCommand(`run --platform linux/amd64 --name ${containerName} -d -p ${port}:${port} ${image}:${version} --dev --rpc-port 11000 --rpc-external`, { echo: false });
