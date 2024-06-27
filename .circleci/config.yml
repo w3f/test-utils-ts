@@ -6,7 +6,7 @@ jobs:
       - image: web3f/node-dind:v3
       - image: mongo:4.0
         name: mongodb
-      - image: parity/polkadot:v1.10.0
+      - image: parity/polkadot:latest
         name: polkadot
         command: --dev --rpc-port 11000 --rpc-external
       - image: mariadb:10.5
